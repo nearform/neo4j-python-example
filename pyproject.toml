@@ -1,22 +1,27 @@
 [tool.poetry]
-name = "neo4j-poc"
+name = "neo4j-example"
 version = "0.1.0"
-description = "POC for testing neo4j drivers and comparing with postgreSQL"
-authors = ["Denis Germano <dlcgermano@gmail.com>", "Jhon Rocha <jhonantans.rocha@nearform.com>"]
+description = "Example for testing neo4j drivers and frameworks"
+authors = [
+    "Denis Germano <dlcgermano@gmail.com>",
+    "Jhon Rocha <jhonantans.rocha@nearform.com>",
+]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
 django = "<5"
 djangorestframework = "^3.14.0"
-neo4j = "^5.15.0"
-neomodel = "^5.2.1"
+neo4j = "5.12.0"                # The neo4j driver
+neomodel = "5.1.2"              # The OGM
+django-neomodel = "^0.1.1"      # The OGM integrated with django
 
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.12.1"
 isort = "^5.13.2"
 autoflake = "^2.2.1"
+ipdb = "^0.13.13"
 
 [build-system]
 requires = ["poetry-core"]
