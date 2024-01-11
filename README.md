@@ -12,3 +12,9 @@
 poetry install
 docker-compose up -d
 ```
+
+then run the python scripts
+
+```shell
+poetry run python src/neomodel/1-Create.py
+```
