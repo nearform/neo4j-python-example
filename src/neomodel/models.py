@@ -1,6 +1,7 @@
 from neomodel import (
     IntegerProperty,
     RelationshipTo,
+    RelationshipFrom,
     StringProperty,
     StructuredNode,
     StructuredRel,
@@ -26,6 +27,7 @@ class Person(StructuredNode):
     reviewed = RelationshipTo("Movie", "REVIEWED", model=Review)
     wrote = RelationshipTo("Movie", "WROTE")
     follows = RelationshipTo("Person", "FOLLOWS")
+    followed_by = RelationshipFrom("Person", "FOLLOWS")
 
 
 class Movie(StructuredNode):
@@ -33,8 +35,8 @@ class Movie(StructuredNode):
     released = IntegerProperty()
     tagline = StringProperty()
 
-    actors = RelationshipTo("Person", "ACTED_IN", model=ActedIn)
-    directors = RelationshipTo("Person", "DIRECTED")
-    producers = RelationshipTo("Person", "PRODUCED")
-    reviewers = RelationshipTo("Person", "REVIEWED", model=Review)
-    writers = RelationshipTo("Person", "WROTE")
+    actors = RelationshipFrom("Person", "ACTED_IN", model=ActedIn)
+    directors = RelationshipFrom("Person", "DIRECTED")
+    producers = RelationshipFrom("Person", "PRODUCED")
+    reviewers = RelationshipFrom("Person", "REVIEWED", model=Review)
+    writers = RelationshipFrom("Person", "WROTE")
