@@ -33,8 +33,8 @@ class Movie(StructuredNode):
     released = IntegerProperty()
     tagline = StringProperty()
 
-    actors = RelationshipTo(Person, "ACTED_IN", model=ActedIn)
-    directors = RelationshipTo(Person, "DIRECTED")
-    producers = RelationshipTo(Person, "PRODUCED")
-    reviewers = RelationshipTo(Person, "REVIEWED", model=Review)
-    writers = RelationshipTo(Person, "WROTE")
+    actors = RelationshipTo("Person", "ACTED_IN", model=ActedIn)
+    directors = RelationshipTo("Person", "DIRECTED")
+    producers = RelationshipTo("Person", "PRODUCED")
+    reviewers = RelationshipTo("Person", "REVIEWED", model=Review)
+    writers = RelationshipTo("Person", "WROTE")
