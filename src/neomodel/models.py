@@ -29,6 +29,12 @@ class Person(StructuredNode):
     follows = RelationshipTo("Person", "FOLLOWS")
     followed_by = RelationshipFrom("Person", "FOLLOWS")
 
+    def co_actors_names(self):
+        results, _ = self.cypher(
+            "MATCH (a:Person) WHERE elementId(a)=$self MATCH (a)-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors) RETURN coActors"
+        )
+        return list(set([self.inflate(row[0]).name for row in results]))
+
 
 class Movie(StructuredNode):
     title = StringProperty(unique_index=True)

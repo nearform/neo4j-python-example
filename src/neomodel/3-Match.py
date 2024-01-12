@@ -1,4 +1,7 @@
-from models import Person, Movie, Review, ActedIn
+from models import Person, Movie
+from neomodel import db
+from neomodel.exceptions import DoesNotExist
+
 
 # List all Tom Hanks movies...
 # MATCH (tom:Person {name: "Tom Hanks"})-[:ACTED_IN]->(tomHanksMovies) RETURN tom,tomHanksMovies
@@ -38,6 +41,45 @@ for movie in tom_hanks.acted_in.all():
 
 # Convert the set to a list to remove duplicated
 co_actors_names = list(co_actors_names)
+print(co_actors_names)
+print()
+
+# Version fetching relations
+co_actors_names = set()
+for _, _, _, co_actor, _ in (
+    Person.nodes.filter(name="Tom Hanks").fetch_relations("acted_in__actors").all()
+):
+    co_actors_names.add(co_actor.name)
+print(list(co_actors_names))
+print()
+
+# Version with custom query
+query = """
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors)
+RETURN coActors
+"""
+
+# Execute the raw Cypher query
+results, _ = db.cypher_query(query)
+
+# Inflate results into Person objects
+co_actors_names = set()
+for record in results:
+    # Extract node id
+    node_id = record[0].element_id
+    try:
+        # Inflate node into a Person object
+        co_actor = Person.inflate(record[0])
+        co_actors_names.add(co_actor.name)
+    except DoesNotExist:
+        # Handle the case where the node does not exist
+        print(f"Node with id {node_id} does not exist")
+print(list(co_actors_names))
+print()
+
+
+# Version with custom query and self inflate
+co_actors_names = tom_hanks.co_actors_names()
 print(co_actors_names)
 print()
 
