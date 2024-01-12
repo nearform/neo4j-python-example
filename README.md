@@ -18,3 +18,9 @@ then run the python scripts
 ```shell
 poetry run python src/neomodel/1-Create.py
 ```
+
+Check out other scripts on src/neomodel
+
+```shell
+ls src/neomodel
+```
