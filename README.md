@@ -2,9 +2,8 @@
 
 ## Depends on
 
-- poetry
-- docker
-- docker-compose
+- [poetry](https://python-poetry.org/docs/#installation)
+- [docker and docker-compose](https://docs.docker.com/compose/install/#scenario-one-install-docker-desktop)
 
 ## Running
 
