@@ -29,6 +29,7 @@ class Person(StructuredNode):
     follows = RelationshipTo("Person", "FOLLOWS")
     followed_by = RelationshipFrom("Person", "FOLLOWS")
 
+    @property
     def co_actors_names(self):
         results, _ = self.cypher(
             "MATCH (a:Person) WHERE elementId(a)=$self MATCH (a)-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors) RETURN coActors"

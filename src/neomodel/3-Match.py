@@ -79,8 +79,7 @@ print()
 
 
 # Version with custom query and self inflate
-co_actors_names = tom_hanks.co_actors_names()
-print(co_actors_names)
+print(tom_hanks.co_actors_names)
 print()
 
 # How people are related to "Cloud Atlas"...
