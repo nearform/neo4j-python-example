@@ -62,13 +62,13 @@ for relation in [
         # Fetch the relationship instance
         rel_instance = relation.relationship(person)
 
-        # Determine the type of relationship
-        if isinstance(rel_instance, ActedIn):
-            rel_type = "ACTED_IN"
-        elif isinstance(rel_instance, Review):
-            rel_type = "REVIEWED"
-
         # Append the person's name, relationship type, and relationship properties
-        results.append((person.name, rel_type, rel_instance.__properties__))
+        results.append(
+            (
+                person.name,
+                relation.definition["relation_type"],
+                rel_instance.__properties__,
+            )
+        )
 print(results)
 print()
